@@ -21,4 +21,4 @@ Performance Optimization: Techniques and projects focused on optimizing the perf
 
 I'm always eager to learn from others and share my knowledge. Feel free to explore, fork, and contribute to this repository. If you have any questions, suggestions, or just want to connect, reach out to me!
 
-LinkedIn: [Henry José](www.linkedin.com/in/henryjosé)
+LinkedIn: [Henry José]([www.linkedin.com/in/henryjosé](https://www.linkedin.com/in/henry-josé-6a19851bb/))
