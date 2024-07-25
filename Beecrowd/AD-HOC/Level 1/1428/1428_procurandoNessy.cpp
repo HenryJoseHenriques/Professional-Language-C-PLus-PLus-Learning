@@ -17,7 +17,7 @@ void adicionarSonar(){
                 if(n < 6 or m > 10000){
                     cout << "Entrada inválida\n";
                 }else{
-                    
+                    /*Meus deus, o que eu boto aqui*/
                 }
             }
             
