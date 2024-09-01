@@ -41,11 +41,19 @@ struct colorScreen{ // Struct de Cores do terminal
   string bg_bright_white = "\x1b[107m";
 };
 
-void clearScreeen() {
-  cout << "\033[2J\033[0;0H"; // Comando para limpar a a tela
+void clearScreen() {
+    // #ifdef _WIN32
+        system("cls"); // Comando para limpar a tela no Windows
+    // #else
+    //     cout << "\033[2J\033[0;0H"; // Comando para limpar a tela em Unix-like
+    // #endif
 }
 
 void pauseScreen() {
-  if (system("read 0 -p") == -1) { // Comando para pausar a tela.
-  }
+    // #ifdef _WIN32
+        system("pause"); // Pausa a tela no Windows
+    // #else
+    //     cout << "Pressione Enter para continuar..."; // Mensagem para Unix-like
+    //     cin.get(); // Espera a entrada do usuário
+    // #endif
 }

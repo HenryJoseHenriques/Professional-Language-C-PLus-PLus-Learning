@@ -1,6 +1,5 @@
 #include "LUE.hpp"
-// #include <ctime> //isso aqui inclui pra usar no aleatorio
-// #include <cstdlib> // tambem pro randomizador
+using namespace std;
 
 void inicializarLista(ListaPalavras &lista) {
     lista.comeco = NULL;

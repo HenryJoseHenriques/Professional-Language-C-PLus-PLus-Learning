@@ -3,6 +3,7 @@
 using namespace std;
 
 
+
 void carregarPalavras(ListaPalavras &lista, string nomeArquivo) { //carrega de um arquivo, copiei de um trabalho meu de algor 2
     ifstream arquivo(nomeArquivo);
     string palavra;
@@ -16,7 +17,7 @@ void carregarPalavras(ListaPalavras &lista, string nomeArquivo) { //carrega de u
     }
 }
 
-void gravarPalavras(ListaPalavras &lista, string nomeArquivo){
+void gravarPalavras(ListaPalavras lista, string nomeArquivo){
     ofstream arquivo(nomeArquivo);
     NoPalavra *atual = lista.comeco;
     if(arquivo.is_open()){
