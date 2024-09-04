@@ -42,18 +42,9 @@ struct colorScreen{ // Struct de Cores do terminal
 };
 
 void clearScreen() {
-    // #ifdef _WIN32
-        system("cls"); // Comando para limpar a tela no Windows
-    // #else
-    //     cout << "\033[2J\033[0;0H"; // Comando para limpar a tela em Unix-like
-    // #endif
+  system("cls"); // Comando para limpar a tela no Windows
 }
 
 void pauseScreen() {
-    // #ifdef _WIN32
-        system("pause"); // Pausa a tela no Windows
-    // #else
-    //     cout << "Pressione Enter para continuar..."; // Mensagem para Unix-like
-    //     cin.get(); // Espera a entrada do usuário
-    // #endif
+  system("pause"); // Pausa a tela no Windows
 }

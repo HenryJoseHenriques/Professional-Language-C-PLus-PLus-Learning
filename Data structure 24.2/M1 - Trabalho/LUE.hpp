@@ -15,7 +15,7 @@ struct ListaPalavras {
     NoPalavra *comeco = NULL;
     NoPalavra *fim = NULL;
 };
-//essa lista � a das tentativas
+//essa lista   a das tentativas
 struct NoTentativa {
     string tentativa;
     NoTentativa *proximo = NULL;
@@ -26,7 +26,7 @@ struct ListaTentativas {
     NoTentativa *fim = NULL;
 };
 
-//aqui � pra ser tudo oq tem haver com as palavras
+//aqui   pra ser tudo oq tem haver com as palavras
 void inicializarLista(ListaPalavras &lista);
 void inserirPalavra(ListaPalavras &lista, string palavra);
 bool removerPalavra(ListaPalavras &lista, string palavra);
@@ -35,18 +35,23 @@ bool pesquisarLista(ListaPalavras lista, string palavra);
 
 void carregarPalavras(ListaPalavras &lista, string nomeArquivo);
 void gravarPalavras(ListaPalavras lista, string nomeArquivo);
+int tamanhoLista(ListaPalavras lista);
 
-// aqui � pra ser das tentativas
+// aqui   pra ser das tentativas
 void inicializarTentativas(ListaTentativas &lista);
 void inserirTentativa(ListaTentativas &lista, string tentativa);
 void mostrarTentativas(ListaTentativas lista);
 
-// � pra ser o jogo na teoria
+//   pra ser o jogo na teoria
 void verificarPalavra(string palavraSecreta, string tentativa);
 void jogar(ListaPalavras &lista, int numPalavras);
+void mostrarTentativas(ListaTentativas lista);
+void liberarLista(ListaPalavras &lista);
+void liberarTentativas(ListaTentativas &lista);
 
 
 //eu fui adicionando pra ter uma base doq precisa ter pode mexer e tirar algo c tu n acha necessario
 
 #endif
+
 

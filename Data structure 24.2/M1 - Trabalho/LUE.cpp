@@ -4,6 +4,12 @@ using namespace std;
 void inicializarLista(ListaPalavras &lista) {
     lista.comeco = NULL;
     lista.fim = NULL;
+
+}
+
+void inicializarTentativas(ListaTentativas &lista) {
+    lista.comeco = NULL;
+    lista.fim = NULL;
 }
 
 void inserirPalavra(ListaPalavras &lista, string palavra) { //adiciona palavras na lista
@@ -20,6 +26,44 @@ void inserirPalavra(ListaPalavras &lista, string palavra) { //adiciona palavras 
     }
 }
 
+void inserirTentativa(ListaTentativas &lista, string tentativa) {
+    NoTentativa *novoNo = new NoTentativa;
+    novoNo->tentativa = tentativa;
+    novoNo->proximo = NULL;
+
+    if (lista.comeco == NULL) {
+        lista.comeco = novoNo;
+        lista.fim = novoNo;
+    } else {
+        lista.fim->proximo = novoNo;
+        lista.fim = novoNo;
+    }
+}
+
+void liberarTentativas(ListaTentativas &lista) {
+    NoTentativa *atual = lista.comeco;
+    while (atual != NULL) {
+        NoTentativa *proximo = atual->proximo;
+        delete atual;
+        atual = proximo;
+    }
+    lista.comeco = NULL;
+    lista.fim = NULL;
+}
+
+void liberarLista(ListaPalavras &lista) {
+    NoPalavra *atual = lista.comeco;
+    while (atual != NULL) {
+        NoPalavra *proximo = atual->proximo;
+        delete atual;
+        atual = proximo;
+    }
+    lista.comeco = NULL;
+    lista.fim = NULL;
+}
+
+
+
 bool removerPalavra(ListaPalavras &lista, string palavra) { //ta no nome ja ele remove palavra da lista
     if (lista.comeco == NULL) return false;
 
@@ -27,9 +71,9 @@ bool removerPalavra(ListaPalavras &lista, string palavra) { //ta no nome ja ele 
     NoPalavra *atual = lista.comeco;
 
     while (atual != NULL) {
-        if (atual->palavra == palavra) { //aqui � se encontrou a palavra
+        if (atual->palavra == palavra) { //aqui   se encontrou a palavra
             if (atual == lista.comeco) {
-                lista.comeco = atual->proximo; //aqui � se for o primeiro
+                lista.comeco = atual->proximo; //aqui   se for o primeiro
             } else {
                 anterior->proximo = atual->proximo; //pula o atual
             }
@@ -60,4 +104,14 @@ bool pesquisarLista(ListaPalavras lista, string palavra){
         atual = atual->proximo;
     }
     return false;
+}
+
+int tamanhoLista(ListaPalavras lista){
+    int c = 0;
+    NoPalavra *atual = lista.comeco;
+	while (atual != NULL) {
+		c++;
+		atual = atual->proximo;
+	}
+    return c;
 }

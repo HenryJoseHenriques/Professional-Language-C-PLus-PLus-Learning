@@ -3,7 +3,6 @@
 using namespace std;
 
 
-
 void carregarPalavras(ListaPalavras &lista, string nomeArquivo) { //carrega de um arquivo, copiei de um trabalho meu de algor 2
     ifstream arquivo(nomeArquivo);
     string palavra;
