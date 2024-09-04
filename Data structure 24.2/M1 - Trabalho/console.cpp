@@ -1,7 +1,8 @@
 #include <iostream>
 using namespace std;
 
-struct colorScreen{ // Struct de Cores do terminal
+struct colorScreen
+{ // Struct de Cores do terminal
   string reset = "\x1b[0m";
   string bold = "\x1b[1m";
   string italic = "\x1b[3m";
@@ -41,10 +42,12 @@ struct colorScreen{ // Struct de Cores do terminal
   string bg_bright_white = "\x1b[107m";
 };
 
-void clearScreen() {
+void clearScreen()
+{
   system("cls"); // Comando para limpar a tela no Windows
 }
 
-void pauseScreen() {
+void pauseScreen()
+{
   system("pause"); // Pausa a tela no Windows
 }

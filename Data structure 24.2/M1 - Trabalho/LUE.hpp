@@ -6,31 +6,35 @@
 using namespace std;
 
 // lista, imitei a do professor
-struct NoPalavra {
+struct NoPalavra
+{
     string palavra;
     NoPalavra *proximo = NULL;
 };
 
-struct ListaPalavras {
+struct ListaPalavras
+{
     NoPalavra *comeco = NULL;
     NoPalavra *fim = NULL;
 };
-//essa lista   a das tentativas
-struct NoTentativa {
+// essa lista   a das tentativas
+struct NoTentativa
+{
     string tentativa;
     NoTentativa *proximo = NULL;
 };
 
-struct ListaTentativas {
+struct ListaTentativas
+{
     NoTentativa *comeco = NULL;
     NoTentativa *fim = NULL;
 };
 
-//aqui   pra ser tudo oq tem haver com as palavras
+// aqui   pra ser tudo oq tem haver com as palavras
 void inicializarLista(ListaPalavras &lista);
 void inserirPalavra(ListaPalavras &lista, string palavra);
 bool removerPalavra(ListaPalavras &lista, string palavra);
-void mostrarLista(ListaPalavras lista); //meti isso daqui pra checa c ta tudo certo deixar como comentario ate a hora do teste
+void mostrarLista(ListaPalavras lista); // meti isso daqui pra checa c ta tudo certo deixar como comentario ate a hora do teste
 bool pesquisarLista(ListaPalavras lista, string palavra);
 
 void carregarPalavras(ListaPalavras &lista, string nomeArquivo);
@@ -49,9 +53,6 @@ void mostrarTentativas(ListaTentativas lista);
 void liberarLista(ListaPalavras &lista);
 void liberarTentativas(ListaTentativas &lista);
 
-
-//eu fui adicionando pra ter uma base doq precisa ter pode mexer e tirar algo c tu n acha necessario
+// eu fui adicionando pra ter uma base doq precisa ter pode mexer e tirar algo c tu n acha necessario
 
 #endif
-
-
