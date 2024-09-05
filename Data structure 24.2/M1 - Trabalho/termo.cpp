@@ -20,7 +20,7 @@ string gerarPalavraSecreta(ListaPalavras lista)
 
 void preencherPalavrasSecretas(ListaPalavras lista, string palavraSecreta[])
 {
-    for (int i = 0; i < 7; i++)
+    for (int i = 0; i < 10; i++)
     {
         bool palavraRepetida;
         do
@@ -39,7 +39,7 @@ void preencherPalavrasSecretas(ListaPalavras lista, string palavraSecreta[])
     }
 }
 
-void verificarTentativa(const string &tentativa, const string &palavraSecreta)
+void verificarTentativa(string tentativa, string palavraSecreta)
 {
     colorScreen cor;
     for (int j = 0; j < tentativa.size(); j++)
@@ -230,24 +230,17 @@ void dueto(ListaPalavras lista, string palavra[])
     liberarTentativas(listaTentativas);
 }
 
-void quarteto(ListaPalavras lista, string palavra[])
+void triteto(ListaPalavras lista, string palavra[])
 {
     ListaTentativas listaTentativas;
     inicializarTentativas(listaTentativas);
-    bool vitoria1 = false, vitoria2 = false, vitoria3 = false, vitoria4 = false;
-
+    bool vitoria1 = false, vitoria2 = false, vitoria3 = false;
     colorScreen cor;
 
-    // Converte todas as palavras secretas para min�sculas
-    palavra[3] = palavraMinusculo(palavra[3]);
-    palavra[4] = palavraMinusculo(palavra[4]);
-    palavra[5] = palavraMinusculo(palavra[5]);
-    palavra[6] = palavraMinusculo(palavra[6]);
-
-    for (int i = 1; i <= 12; i++)
+    for (int i = 1; i <= 10; i++)
     {
         string usuarioTentativa;
-        cout << "Tentativa " << i << " (quarteto): ";
+        cout << "Tentativa " << i << " (triteto): ";
         cin >> usuarioTentativa;
 
         if (validadePalavra(palavraMinusculo(usuarioTentativa)))
@@ -287,13 +280,90 @@ void quarteto(ListaPalavras lista, string palavra[])
                     vitoria3 = true;
                 }
             }
+            if (vitoria1 && vitoria2 && vitoria3)
+            {
+                cout << "Parab�ns, voc� acertou todas as palavras!\n";
+                ranking(i);
+                pauseScreen();
+                break;
+            }
+        }
+        else
+        {
+            cout << "Palavra com tamanho inválido.\n ";
+            i--;
+        }
+    }
+    if (!vitoria1 || !vitoria2 || !vitoria3)
+    {
+        cout << "Voc� perdeu. As palavras corretas eram: "
+             << palavra[3] << ", " << palavra[4] << ", "
+             << palavra[5];
+        pauseScreen();
+    }
+
+    // Liberar mem�ria das tentativas
+    liberarTentativas(listaTentativas);
+}
+
+void quarteto(ListaPalavras lista, string palavra[])
+{
+    ListaTentativas listaTentativas;
+    inicializarTentativas(listaTentativas);
+    bool vitoria1 = false, vitoria2 = false, vitoria3 = false, vitoria4 = false;
+
+    colorScreen cor;
+
+    for (int i = 1; i <= 12; i++)
+    {
+        string usuarioTentativa;
+        cout << "Tentativa " << i << " (quarteto): ";
+        cin >> usuarioTentativa;
+
+        if (validadePalavra(palavraMinusculo(usuarioTentativa)))
+        {
+            // Insere a tentativa na lista de tentativas
+            inserirTentativa(listaTentativas, usuarioTentativa);
+
+            if (vitoria1 == false)
+            {
+                // Verifica e exibe a tentativa para a primeira palavra secreta
+                cout << "Palavra 1: ";
+                verificarTentativa(usuarioTentativa, palavra[3]);
+                if (usuarioTentativa == palavra[6])
+                {
+                    vitoria1 = true;
+                }
+            }
+
+            if (vitoria2 == false)
+            {
+                // Verifica e exibe a tentativa para a segunda palavra secreta
+                cout << "Palavra 2: ";
+                verificarTentativa(usuarioTentativa, palavra[4]);
+                if (usuarioTentativa == palavra[7])
+                {
+                    vitoria2 = true;
+                }
+            }
+
+            if (vitoria3 == false)
+            {
+                // Verifica e exibe a tentativa para a terceira palavra secreta
+                cout << "Palavra 3: ";
+                verificarTentativa(usuarioTentativa, palavra[5]);
+                if (usuarioTentativa == palavra[8])
+                {
+                    vitoria3 = true;
+                }
+            }
 
             if (vitoria4 == false)
             {
                 // Verifica e exibe a tentativa para a quarta palavra secreta
                 cout << "Palavra 4: ";
                 verificarTentativa(usuarioTentativa, palavra[6]);
-                if (usuarioTentativa == palavra[6])
+                if (usuarioTentativa == palavra[9])
                 {
                     vitoria4 = true;
                 }
@@ -316,8 +386,8 @@ void quarteto(ListaPalavras lista, string palavra[])
     if (!vitoria1 || !vitoria2 || !vitoria3 || !vitoria4)
     {
         cout << "Voc� perdeu. As palavras corretas eram: "
-             << palavra[3] << ", " << palavra[4] << ", "
-             << palavra[5] << ", " << palavra[6] << "\n";
+             << palavra[6] << ", " << palavra[7] << ", "
+             << palavra[8] << ", " << palavra[9] << "\n";
         pauseScreen();
     }
 
@@ -334,7 +404,7 @@ void liberarMemoria(ListaPalavras &lista, ListaTentativas &listaTentativas)
 void jogar(ListaPalavras lista)
 {
     int e;
-    string palavraSecreta[7];
+    string palavraSecreta[10];
     preencherPalavrasSecretas(lista, palavraSecreta);
 
     ListaTentativas listaTentativas;
@@ -344,7 +414,7 @@ void jogar(ListaPalavras lista)
     {
         clearScreen();
         cout << "Escolha o modo de jogo\n";
-        cout << "1 - termo.\n2- dueto.\n3- quarteto.\n4- sair.\n Escolha: ";
+        cout << "1 - termo.\n2 - dueto.\n3 - triteto.\n4 - Quarteo.\n5 - Sair\n Escolha: ";
         cin >> e;
         switch (e)
         {
@@ -355,13 +425,16 @@ void jogar(ListaPalavras lista)
             dueto(lista, palavraSecreta);
             break;
         case 3:
-            quarteto(lista, palavraSecreta);
+            triteto(lista, palavraSecreta);
             break;
         case 4:
+            quarteto(lista, palavraSecreta);
+            break;
+        case 5:
             liberarMemoria(lista, listaTentativas);
             return;
         default:
-            cout << "Op��o inv�lida.\n";
+            cout << "Opção inválida.\n";
             break;
         }
     } while (e != 4);
@@ -496,7 +569,7 @@ void menu()
     {
         clearScreen();
         cout << "\t\tTERMO\t\t\n";
-        cout << " 1 - JOGAR\n 2 - COMO JOGAR\n 3 - ADICIONAR PALAVRAS\n 4 - REMOVER PALAVRAS\n 5 - LISTA DE PALAVRAS\n 6 - CR�DITOS\n 7 - SAIR\n ESCOLHA:";
+        cout << " 1 - JOGAR\n 2 - COMO JOGAR\n 3 - ADICIONAR PALAVRAS\n 4 - REMOVER PALAVRAS\n 5 - LISTA DE PALAVRAS\n 6 - CRÉDITOS\n 7 - SAIR\n ESCOLHA:";
         cin >> input;
         switch (input)
         {
@@ -525,7 +598,7 @@ void menu()
             cout << "Saindo...\n";
             break;
         default:
-            cout << "Op��o inv�lida. Digite novamente.\n";
+            cout << "Opção inválida. Digite novamente.\n";
         }
     } while (input != 7);
 }
