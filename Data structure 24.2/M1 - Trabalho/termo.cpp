@@ -2,8 +2,6 @@
 #include <iostream>
 #include "lue.hpp"
 
-// using namespace std;
-
 string gerarPalavraSecreta(ListaPalavras lista)
 {
     int p = numRandomico(lista);
@@ -98,12 +96,11 @@ void ranking(int c)
     }
 }
 
-void termo(ListaPalavras lista, string palavraSecreta)
+void termo(ListaPalavras lista, ListaPalavras listaTentativas, string palavraSecreta)
 {
-    ListaTentativas listaTentativas;
-    inicializarTentativas(listaTentativas);
     bool vitoria = false;
     colorScreen cor; // Instância para as cores
+    string Tentativa = "Tentativas.txt";
 
     for (int i = 1; i <= 6; i++)
     {
@@ -116,7 +113,8 @@ void termo(ListaPalavras lista, string palavraSecreta)
             // usuarioTentativa = palavraMinusculo(usuarioTentativa);
 
             // Insere a tentativa na lista de tentativas
-            inserirTentativa(listaTentativas, usuarioTentativa);
+            inserirPalavra(listaTentativas, usuarioTentativa);
+            gravarPalavras(listaTentativas, Tentativa);
 
             if (usuarioTentativa == palavraSecreta)
             {
@@ -162,17 +160,13 @@ void termo(ListaPalavras lista, string palavraSecreta)
         cout << "Você perdeu. A palavra correta era: " << palavraSecreta << "\n";
         pauseScreen();
     }
-
-    // Liberar memória das tentativas
-    liberarTentativas(listaTentativas);
 }
 
-void dueto(ListaPalavras lista, string palavra[])
+void dueto(ListaPalavras lista, ListaPalavras listaTentativas, string palavra[])
 {
-    ListaTentativas listaTentativas;
-    inicializarTentativas(listaTentativas);
     bool vitoria1 = false, vitoria2 = false;
     colorScreen cor;
+    string Tentativa = "Tentativas.txt";
 
     for (int i = 1; i <= 8; i++)
     {
@@ -183,7 +177,8 @@ void dueto(ListaPalavras lista, string palavra[])
         if (validadePalavra(palavraMinusculo(usuarioTentativa)))
         {
             // Insere a tentativa na lista de tentativas
-            inserirTentativa(listaTentativas, usuarioTentativa);
+            inserirPalavra(listaTentativas, usuarioTentativa);
+            gravarPalavras(listaTentativas, Tentativa);
 
             if (vitoria1 == false)
             {
@@ -226,16 +221,13 @@ void dueto(ListaPalavras lista, string palavra[])
         cout << "Voc� perdeu. As palavras corretas eram: " << palavra[1] << " e " << palavra[2] << "\n";
         pauseScreen();
     }
-    // Liberar mem�ria das tentativas
-    liberarTentativas(listaTentativas);
 }
 
-void triteto(ListaPalavras lista, string palavra[])
+void triteto(ListaPalavras lista, ListaPalavras listaTentativas, string palavra[])
 {
-    ListaTentativas listaTentativas;
-    inicializarTentativas(listaTentativas);
     bool vitoria1 = false, vitoria2 = false, vitoria3 = false;
     colorScreen cor;
+    string Tentativa = "Tentativas.txt";
 
     for (int i = 1; i <= 10; i++)
     {
@@ -246,7 +238,8 @@ void triteto(ListaPalavras lista, string palavra[])
         if (validadePalavra(palavraMinusculo(usuarioTentativa)))
         {
             // Insere a tentativa na lista de tentativas
-            inserirTentativa(listaTentativas, usuarioTentativa);
+            inserirPalavra(listaTentativas, usuarioTentativa);
+            gravarPalavras(listaTentativas, Tentativa);
 
             if (vitoria1 == false)
             {
@@ -301,18 +294,14 @@ void triteto(ListaPalavras lista, string palavra[])
              << palavra[5];
         pauseScreen();
     }
-
-    // Liberar mem�ria das tentativas
-    liberarTentativas(listaTentativas);
 }
 
-void quarteto(ListaPalavras lista, string palavra[])
+void quarteto(ListaPalavras lista, ListaPalavras listaTentativas, string palavra[])
 {
-    ListaTentativas listaTentativas;
-    inicializarTentativas(listaTentativas);
     bool vitoria1 = false, vitoria2 = false, vitoria3 = false, vitoria4 = false;
 
     colorScreen cor;
+    string Tentativa = "Tentativas.txt";
 
     for (int i = 1; i <= 12; i++)
     {
@@ -323,7 +312,8 @@ void quarteto(ListaPalavras lista, string palavra[])
         if (validadePalavra(palavraMinusculo(usuarioTentativa)))
         {
             // Insere a tentativa na lista de tentativas
-            inserirTentativa(listaTentativas, usuarioTentativa);
+            inserirPalavra(listaTentativas, usuarioTentativa);
+            gravarPalavras(listaTentativas, Tentativa);
 
             if (vitoria1 == false)
             {
@@ -390,16 +380,13 @@ void quarteto(ListaPalavras lista, string palavra[])
              << palavra[8] << ", " << palavra[9] << "\n";
         pauseScreen();
     }
-
-    // Liberar mem�ria das tentativas
-    liberarTentativas(listaTentativas);
 }
 
-void liberarMemoria(ListaPalavras &lista, ListaTentativas &listaTentativas)
-{
-    liberarLista(lista);
-    liberarTentativas(listaTentativas);
-}
+// void liberarMemoria(ListaPalavras &lista, ListaPalavras &ListaTentativas)
+// {
+//     liberarLista(lista);
+//     liberarLista(ListaTentativas);
+// }
 
 void jogar(ListaPalavras lista)
 {
@@ -407,9 +394,8 @@ void jogar(ListaPalavras lista)
     string palavraSecreta[10];
     preencherPalavrasSecretas(lista, palavraSecreta);
 
-    ListaTentativas listaTentativas;
-    inicializarTentativas(listaTentativas);
-
+    ListaPalavras listaTentativas;
+    inicializarLista(listaTentativas);
     do
     {
         clearScreen();
@@ -419,19 +405,19 @@ void jogar(ListaPalavras lista)
         switch (e)
         {
         case 1:
-            termo(lista, palavraSecreta[0]);
+            termo(lista,listaTentativas, palavraSecreta[0]);
             break;
         case 2:
-            dueto(lista, palavraSecreta);
+            dueto(lista,listaTentativas, palavraSecreta);
             break;
         case 3:
-            triteto(lista, palavraSecreta);
+            triteto(lista,listaTentativas, palavraSecreta);
             break;
         case 4:
-            quarteto(lista, palavraSecreta);
+            quarteto(lista,listaTentativas, palavraSecreta);
             break;
         case 5:
-            liberarMemoria(lista, listaTentativas);
+            liberarLista(listaTentativas);
             return;
         default:
             cout << "Opção inválida.\n";
@@ -558,13 +544,11 @@ void menu()
     string listaTermo = "palavrasTermo.txt";
     int input = 0;
     ListaPalavras lista;
+    //ListaPalavras ListaTentativas; // Inicializa a lista de tentativas
 
     inicializarLista(lista);
     carregarPalavras(lista, listaTermo);
-
-    ListaTentativas listaTentativas; // Inicializa a lista de tentativas
-    inicializarTentativas(listaTentativas);
-
+    //inicializarLista(ListaTentativas);
     do
     {
         clearScreen();
@@ -594,7 +578,7 @@ void menu()
             creditos();
             break;
         case 7:
-            liberarMemoria(lista, listaTentativas);
+            liberarLista(lista);
             cout << "Saindo...\n";
             break;
         default:

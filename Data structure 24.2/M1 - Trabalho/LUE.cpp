@@ -7,12 +7,6 @@ void inicializarLista(ListaPalavras &lista)
     lista.fim = NULL;
 }
 
-void inicializarTentativas(ListaTentativas &lista)
-{
-    lista.comeco = NULL;
-    lista.fim = NULL;
-}
-
 void inserirPalavra(ListaPalavras &lista, string palavra)
 { // adiciona palavras na lista
     NoPalavra *novoNo = new NoPalavra;
@@ -29,37 +23,6 @@ void inserirPalavra(ListaPalavras &lista, string palavra)
         lista.fim->proximo = novoNo;
         lista.fim = novoNo;
     }
-}
-
-void inserirTentativa(ListaTentativas &lista, string tentativa)
-{
-    NoTentativa *novoNo = new NoTentativa;
-    novoNo->tentativa = tentativa;
-    novoNo->proximo = NULL;
-
-    if (lista.comeco == NULL)
-    {
-        lista.comeco = novoNo;
-        lista.fim = novoNo;
-    }
-    else
-    {
-        lista.fim->proximo = novoNo;
-        lista.fim = novoNo;
-    }
-}
-
-void liberarTentativas(ListaTentativas &lista)
-{
-    NoTentativa *atual = lista.comeco;
-    while (atual != NULL)
-    {
-        NoTentativa *proximo = atual->proximo;
-        delete atual;
-        atual = proximo;
-    }
-    lista.comeco = NULL;
-    lista.fim = NULL;
 }
 
 void liberarLista(ListaPalavras &lista)
