@@ -23,7 +23,7 @@ void preencherPalavrasSecretas(ListaPalavras lista, string palavraSecreta[])
         bool palavraRepetida;
         do
         {
-            palavraRepetida = false; // Assume que a palavra n�o � repetida
+            palavraRepetida = false;
             palavraSecreta[i] = gerarPalavraSecreta(lista);
             for (int j = 0; j < i; j++)
             {
@@ -319,7 +319,7 @@ void quarteto(ListaPalavras lista, ListaPalavras listaTentativas, string palavra
             {
                 // Verifica e exibe a tentativa para a primeira palavra secreta
                 cout << "Palavra 1: ";
-                verificarTentativa(usuarioTentativa, palavra[3]);
+                verificarTentativa(usuarioTentativa, palavra[6]);
                 if (usuarioTentativa == palavra[6])
                 {
                     vitoria1 = true;
@@ -330,7 +330,7 @@ void quarteto(ListaPalavras lista, ListaPalavras listaTentativas, string palavra
             {
                 // Verifica e exibe a tentativa para a segunda palavra secreta
                 cout << "Palavra 2: ";
-                verificarTentativa(usuarioTentativa, palavra[4]);
+                verificarTentativa(usuarioTentativa, palavra[7]);
                 if (usuarioTentativa == palavra[7])
                 {
                     vitoria2 = true;
@@ -341,7 +341,7 @@ void quarteto(ListaPalavras lista, ListaPalavras listaTentativas, string palavra
             {
                 // Verifica e exibe a tentativa para a terceira palavra secreta
                 cout << "Palavra 3: ";
-                verificarTentativa(usuarioTentativa, palavra[5]);
+                verificarTentativa(usuarioTentativa, palavra[8]);
                 if (usuarioTentativa == palavra[8])
                 {
                     vitoria3 = true;
@@ -352,7 +352,7 @@ void quarteto(ListaPalavras lista, ListaPalavras listaTentativas, string palavra
             {
                 // Verifica e exibe a tentativa para a quarta palavra secreta
                 cout << "Palavra 4: ";
-                verificarTentativa(usuarioTentativa, palavra[6]);
+                verificarTentativa(usuarioTentativa, palavra[9]);
                 if (usuarioTentativa == palavra[9])
                 {
                     vitoria4 = true;
@@ -381,12 +381,6 @@ void quarteto(ListaPalavras lista, ListaPalavras listaTentativas, string palavra
         pauseScreen();
     }
 }
-
-// void liberarMemoria(ListaPalavras &lista, ListaPalavras &ListaTentativas)
-// {
-//     liberarLista(lista);
-//     liberarLista(ListaTentativas);
-// }
 
 void jogar(ListaPalavras lista)
 {
