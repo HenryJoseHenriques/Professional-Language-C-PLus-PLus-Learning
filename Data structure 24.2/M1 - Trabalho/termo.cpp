@@ -62,13 +62,13 @@ void verificarTentativa(string tentativa, string palavraSecreta)
 }
 
 // Precisa terminar
-void preencherAlfabeto(string palavraUsuario, string palavraSecreta)
-{
-    char alfabetoMinusculo[26] = {
-        'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j',
-        'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't',
-        'u', 'v', 'w', 'x', 'y', 'z'};
-}
+// void preencherAlfabeto(string palavraUsuario, string palavraSecreta)
+// {
+//     char alfabetoMinusculo[26] = {
+//         'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j',
+//         'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't',
+//         'u', 'v', 'w', 'x', 'y', 'z'};
+// }
 
 void ranking(int c)
 {
@@ -96,7 +96,7 @@ void ranking(int c)
     }
 }
 
-void termo(ListaPalavras lista, ListaPalavras listaTentativas, string palavraSecreta)
+void termo(ListaPalavras listaTentativas, string palavraSecreta)
 {
     bool vitoria = false;
     colorScreen cor; // Instância para as cores
@@ -162,7 +162,7 @@ void termo(ListaPalavras lista, ListaPalavras listaTentativas, string palavraSec
     }
 }
 
-void dueto(ListaPalavras lista, ListaPalavras listaTentativas, string palavra[])
+void dueto(ListaPalavras listaTentativas, string palavra[])
 {
     bool vitoria1 = false, vitoria2 = false;
     colorScreen cor;
@@ -223,7 +223,7 @@ void dueto(ListaPalavras lista, ListaPalavras listaTentativas, string palavra[])
     }
 }
 
-void triteto(ListaPalavras lista, ListaPalavras listaTentativas, string palavra[])
+void triteto(ListaPalavras listaTentativas, string palavra[])
 {
     bool vitoria1 = false, vitoria2 = false, vitoria3 = false;
     colorScreen cor;
@@ -296,7 +296,7 @@ void triteto(ListaPalavras lista, ListaPalavras listaTentativas, string palavra[
     }
 }
 
-void quarteto(ListaPalavras lista, ListaPalavras listaTentativas, string palavra[])
+void quarteto(ListaPalavras listaTentativas, string palavra[])
 {
     bool vitoria1 = false, vitoria2 = false, vitoria3 = false, vitoria4 = false;
 
@@ -399,16 +399,16 @@ void jogar(ListaPalavras lista)
         switch (e)
         {
         case 1:
-            termo(lista,listaTentativas, palavraSecreta[0]);
+            termo(listaTentativas, palavraSecreta[0]);
             break;
         case 2:
-            dueto(lista,listaTentativas, palavraSecreta);
+            dueto(listaTentativas, palavraSecreta);
             break;
         case 3:
-            triteto(lista,listaTentativas, palavraSecreta);
+            triteto(listaTentativas, palavraSecreta);
             break;
         case 4:
-            quarteto(lista,listaTentativas, palavraSecreta);
+            quarteto(listaTentativas, palavraSecreta);
             break;
         case 5:
             liberarLista(listaTentativas);

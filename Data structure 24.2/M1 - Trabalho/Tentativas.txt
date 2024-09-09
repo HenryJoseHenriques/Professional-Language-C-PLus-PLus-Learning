@@ -1,1 +1,3 @@
-apelo
+tigre
+moeda
+chuva
