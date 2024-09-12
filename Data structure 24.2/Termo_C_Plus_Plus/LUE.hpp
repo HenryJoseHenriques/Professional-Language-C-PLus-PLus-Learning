@@ -10,25 +10,12 @@ struct NoPalavra
 {
     string palavra;
     NoPalavra *proximo = NULL;
-};
+}; 
 
 struct ListaPalavras
 {
     NoPalavra *comeco = NULL;
     NoPalavra *fim = NULL;
-};
-
-//essa lista   a das tentativas
-struct NoTentativa
-{
-    string tentativa;
-    NoTentativa *proximo = NULL;
-};
-
-struct ListaTentativas
-{
-    NoTentativa *comeco = NULL;
-    NoTentativa *fim = NULL;
 };
 
 // aqui   pra ser tudo oq tem haver com as palavras

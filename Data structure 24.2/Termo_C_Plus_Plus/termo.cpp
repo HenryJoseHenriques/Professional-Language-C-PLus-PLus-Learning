@@ -1,4 +1,4 @@
-// alt + shif + f = endentação
+// alt + shif + f = endenta��o
 #include <iostream>
 #include "lue.hpp"
 
@@ -44,31 +44,22 @@ void verificarTentativa(string tentativa, string palavraSecreta)
     {
         if (tentativa[j] == palavraSecreta[j])
         {
-            // Letra est� na posi��o correta
+            // Letra est  na posi  o correta
             cout << cor.green << tentativa[j] << cor.reset;
         }
         else if (palavraSecreta.find(tentativa[j]) != string::npos)
         {
-            // Letra est� na palavra mas na posi��o errada
+            // Letra est  na palavra mas na posi  o errada
             cout << cor.yellow << tentativa[j] << cor.reset;
         }
         else
         {
-            // Letra n�o est� na palavra
+            // Letra n o est  na palavra
             cout << tentativa[j];
         }
     }
     cout << endl;
 }
-
-// Precisa terminar
-// void preencherAlfabeto(string palavraUsuario, string palavraSecreta)
-// {
-//     char alfabetoMinusculo[26] = {
-//         'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j',
-//         'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't',
-//         'u', 'v', 'w', 'x', 'y', 'z'};
-// }
 
 void ranking(int c)
 {
@@ -91,7 +82,7 @@ void ranking(int c)
         cout << "POR POUCO, NA QUINTA TENTATIVA.\n";
         break;
     case 6:
-        cout << "NA RISCA, NA �LTIMA TENTATIVA.\n";
+        cout << "NA RISCA, NA  LTIMA TENTATIVA.\n";
         break;
     }
 }
@@ -99,7 +90,7 @@ void ranking(int c)
 void termo(ListaPalavras listaTentativas, string palavraSecreta)
 {
     bool vitoria = false;
-    colorScreen cor; // Instância para as cores
+    colorScreen cor; // Inst�ncia para as cores
     string Tentativa = "Tentativas.txt";
 
     for (int i = 1; i <= 6; i++)
@@ -119,7 +110,7 @@ void termo(ListaPalavras listaTentativas, string palavraSecreta)
             if (usuarioTentativa == palavraSecreta)
             {
                 vitoria = true;
-                cout << "Parabéns, você acertou!\n";
+                cout << "Parab�ns, voc� acertou!\n";
                 ranking(i);
                 pauseScreen();
                 break;
@@ -131,17 +122,17 @@ void termo(ListaPalavras listaTentativas, string palavraSecreta)
                 {
                     if (usuarioTentativa[j] == palavraSecreta[j])
                     {
-                        // Letra está na posição correta
+                        // Letra est� na posi��o correta
                         cout << cor.green << usuarioTentativa[j] << cor.reset;
                     }
                     else if (palavraSecreta.find(usuarioTentativa[j]) != string::npos)
                     {
-                        // Letra está na palavra mas na posição errada
+                        // Letra est� na palavra mas na posi��o errada
                         cout << cor.yellow << usuarioTentativa[j] << cor.reset;
                     }
                     else
                     {
-                        // Letra não está na palavra
+                        // Letra n�o est� na palavra
                         cout << usuarioTentativa[j];
                     }
                 }
@@ -151,13 +142,13 @@ void termo(ListaPalavras listaTentativas, string palavraSecreta)
         }
         else
         {
-            cout << "Palavra com tamanho inválido.\n";
+            cout << "Palavra com tamanho inv�lido.\n";
             i--;
         }
     }
     if (!vitoria)
     {
-        cout << "Você perdeu. A palavra correta era: " << palavraSecreta << "\n";
+        cout << "Voc� perdeu. A palavra correta era: " << palavraSecreta << "\n";
         pauseScreen();
     }
 }
@@ -204,7 +195,7 @@ void dueto(ListaPalavras listaTentativas, string palavra[])
 
             if (vitoria1 && vitoria2)
             {
-                cout << "Parab�ns, voc� acertou ambas as palavras!\n";
+                cout << "Parab�ns, voc  acertou ambas as palavras!\n";
                 ranking(i);
                 pauseScreen();
                 break;
@@ -212,7 +203,7 @@ void dueto(ListaPalavras listaTentativas, string palavra[])
         }
         else
         {
-            cout << "Palavra com tamanho inválido.\n";
+            cout << "Palavra com tamanho inv�lido.\n";
             i--;
         }
     }
@@ -275,7 +266,7 @@ void triteto(ListaPalavras listaTentativas, string palavra[])
             }
             if (vitoria1 && vitoria2 && vitoria3)
             {
-                cout << "Parab�ns, voc� acertou todas as palavras!\n";
+                cout << "Parab�ns, voc  acertou todas as palavras!\n";
                 ranking(i);
                 pauseScreen();
                 break;
@@ -283,7 +274,7 @@ void triteto(ListaPalavras listaTentativas, string palavra[])
         }
         else
         {
-            cout << "Palavra com tamanho inválido.\n ";
+            cout << "Palavra com tamanho inv�lido.\n ";
             i--;
         }
     }
@@ -369,7 +360,7 @@ void quarteto(ListaPalavras listaTentativas, string palavra[])
         }
         else
         {
-            cout << "Palavra com tamanho inválido.\n ";
+            cout << "Palavra com tamanho inv�lido.\n ";
             i--;
         }
     }
@@ -394,7 +385,7 @@ void jogar(ListaPalavras lista)
     {
         clearScreen();
         cout << "Escolha o modo de jogo\n";
-        cout << "1 - termo.\n2 - dueto.\n3 - triteto.\n4 - Quarteo.\n5 - Sair\n Escolha: ";
+        cout << "1 - termo.\n2 - dueto.\n3 - triteto.\n4 - quarteto.\n5 - Sair\n Escolha: ";
         cin >> e;
         switch (e)
         {
@@ -414,7 +405,7 @@ void jogar(ListaPalavras lista)
             liberarLista(listaTentativas);
             return;
         default:
-            cout << "Opção inválida.\n";
+            cout << "Op��o inv�lida.\n";
             break;
         }
     } while (e != 4);
@@ -474,6 +465,7 @@ void HUD_AdicionarPalavra(ListaPalavras &lista, string listaTermo)
     cout << "Digite a palavra que deseja inserir.\n";
     cin >> novaPalavra;
     novaPalavra = palavraMinusculo(novaPalavra);
+    //novaPalavra = removeracentos(novaPalavra);
     if (!validadePalavra(novaPalavra))
     {
         cout << "Palavra com tamanho inv�lido!\n";
@@ -482,7 +474,7 @@ void HUD_AdicionarPalavra(ListaPalavras &lista, string listaTermo)
     {
         if (!adiconarNovaPalavra(lista, novaPalavra))
         {
-            cout << "Essa palavra j� existe na lista.\n";
+            cout << "Essa palavra j�  existe na lista.\n";
         }
         else
         {
@@ -501,6 +493,7 @@ void HUD_RemoverPalavra(ListaPalavras &lista, string listaTermo)
     cout << "Digite a palavra que deseja remover.\n";
     cin >> remove;
     remove = palavraMinusculo(remove);
+    //remove = removeracentos(remove);
     if (!validadePalavra(remove))
     {
         cout << "Palavra com tamanho inv�lido!\n";
@@ -509,7 +502,7 @@ void HUD_RemoverPalavra(ListaPalavras &lista, string listaTermo)
     {
         if (!removerPalavraExistente(lista, remove))
         {
-            cout << "Essa palavra n�o existe na lista.\n";
+            cout << "Essa palavra n o existe na lista.\n";
         }
         else
         {
@@ -524,11 +517,11 @@ void HUD_RemoverPalavra(ListaPalavras &lista, string listaTermo)
 void creditos()
 {
     clearScreen();
-    cout << "\nUNIVERSIDADE DO VALE DO ITAJA�\n";
+    cout << "\nUNIVERSIDADE DO VALE DO ITAJA \n";
     cout << "DISCIPLINA: ESTRUTURA DE DADOS\n";
     cout << "PROFESSOR: MARCOS CARRARD\n";
-    cout << "ALUNOS: HENRY JOS�, VIN�CIUS MEDEIROS SANTOS\n";
-    cout << "CURSO: ENGENHARIA DE COMPUTA��O\n";
+    cout << "ALUNOS: HENRY JOS , VIN CIUS MEDEIROS SANTOS\n";
+    cout << "CURSO: ENGENHARIA DE COMPUTA  O\n";
     pauseScreen();
     clearScreen();
 }
@@ -547,7 +540,7 @@ void menu()
     {
         clearScreen();
         cout << "\t\tTERMO\t\t\n";
-        cout << " 1 - JOGAR\n 2 - COMO JOGAR\n 3 - ADICIONAR PALAVRAS\n 4 - REMOVER PALAVRAS\n 5 - LISTA DE PALAVRAS\n 6 - CRÉDITOS\n 7 - SAIR\n ESCOLHA:";
+        cout << " 1 - JOGAR\n 2 - COMO JOGAR\n 3 - ADICIONAR PALAVRAS\n 4 - REMOVER PALAVRAS\n 5 - LISTA DE PALAVRAS\n 6 - CR�DITOS\n 7 - SAIR\n ESCOLHA:";
         cin >> input;
         switch (input)
         {
@@ -576,7 +569,7 @@ void menu()
             cout << "Saindo...\n";
             break;
         default:
-            cout << "Opção inválida. Digite novamente.\n";
+            cout << "Op��o inv�lida. Digite novamente.\n";
         }
     } while (input != 7);
 }
