@@ -35,6 +35,7 @@ void preencherPalavrasSecretas(ListaPalavras lista, string palavraSecreta[])
             }
         } while (palavraRepetida);
     }
+    
 }
 
 void verificarTentativa(string tentativa, string palavraSecreta)
@@ -46,8 +47,12 @@ void verificarTentativa(string tentativa, string palavraSecreta)
         {
             // Letra est  na posi  o correta
             cout << cor.green << tentativa[j] << cor.reset;
+            palavraSecreta[j] = ' ';
         }
-        else if (palavraSecreta.find(tentativa[j]) != string::npos)
+    }
+    for (int j = 0; j < tentativa.size(); j++)
+    {
+        if (palavraSecreta.find(tentativa[j]) != string::npos)
         {
             // Letra est  na palavra mas na posi  o errada
             cout << cor.yellow << tentativa[j] << cor.reset;
@@ -58,6 +63,8 @@ void verificarTentativa(string tentativa, string palavraSecreta)
             cout << tentativa[j];
         }
     }
+    cout << "\n" + palavraSecreta + "\n";
+    
     cout << endl;
 }
 
@@ -117,25 +124,29 @@ void termo(ListaPalavras listaTentativas, string palavraSecreta)
             }
             else
             {
-                // Exibe a tentativa com as cores correspondentes
-                for (int j = 0; j < usuarioTentativa.size(); j++)
-                {
-                    if (usuarioTentativa[j] == palavraSecreta[j])
+                    string palavraSecreta_temp = palavraSecreta;
+                    for (int j = 0; j < usuarioTentativa.size(); j++)
                     {
-                        // Letra est� na posi��o correta
-                        cout << cor.green << usuarioTentativa[j] << cor.reset;
+                        if (usuarioTentativa[j] == palavraSecreta_temp[j])
+                        {
+                            // Letra est  na posi  o correta
+                            cout << cor.green << usuarioTentativa[j] << cor.reset;
+                            palavraSecreta_temp[j] = ' ';
+                        }
                     }
-                    else if (palavraSecreta.find(usuarioTentativa[j]) != string::npos)
+                    for (int j = 0; j < usuarioTentativa.size(); j++)
                     {
-                        // Letra est� na palavra mas na posi��o errada
-                        cout << cor.yellow << usuarioTentativa[j] << cor.reset;
+                        if (palavraSecreta_temp.find(usuarioTentativa[j]) != string::npos)
+                        {
+                            // Letra est  na palavra mas na posi  o errada
+                            cout << cor.yellow << usuarioTentativa[j] << cor.reset;
+                        }
+                        else
+                        {
+                            // Letra n o est  na palavra
+                            cout << usuarioTentativa[j];
+                        }
                     }
-                    else
-                    {
-                        // Letra n�o est� na palavra
-                        cout << usuarioTentativa[j];
-                    }
-                }
                 cout << endl;
                 //  ranking(i);
             }

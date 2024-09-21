@@ -51,29 +51,38 @@ bool inserirFinalLUE(LUE &lista, char dado){
 bool inserirOrdenadoLUE(LUE &lista, char dado){
     No * novo = NewDate(dado);
     if(novo != NULL){
+
         if(lista.comeco == NULL){ // Caso 1 - Lista vazia
             lista.comeco = novo;
             lista.fim = novo;
             return true;
-        }else if(dado < lista.comeco->info){ //Inicio  da Lista
-            No * aux = lista.comeco;
-            lista.comeco = novo;
-            novo->elo = aux;
-        }else if(dado > lista.comeco->info){ // Final da Lista
+        }
 
-        }else{ // Descobrir 
+        else if(dado < lista.comeco->info){ //Inicio  da Lista
+            novo->elo = lista.comeco;
+            lista.comeco = novo;
+            return true;
+        }
+
+        else if(dado > lista.fim->info){ // Final da Lista
+            novo->elo = lista.fim;
+            lista.fim = novo;
+            return true;
+        }
+        
+        else{ // Meio da lista
             No * aux = lista.comeco;
             while(aux != NULL){
-                if(aux->info < dado){
-                    
-                }else if (aux->info < dado){
-
-                }else{
-
+                No * prox = aux->elo;
+                if(aux->info < dado && dado < prox->info){
+                    novo->elo = prox;
+                    aux->elo = novo;
+                    break; 
                 }
                 aux = aux->elo;
             }
         }
+
     }else{
         return false;
     }
@@ -104,6 +113,40 @@ void liberarLUE(LUE lista){
         aux = aux->elo;
         delete temp;
     }
+}
+
+bool retirarLue(LUE &lista, char dado){
+    No * aux, * ant;
+    if(lista.comeco == NULL){
+        return false;
+    }else{
+        if(lista.comeco->info == dado){
+            if(lista.fim->info == dado){
+                delete lista.comeco;
+                delete lista.fim;
+            }else{
+                No * aux = lista.comeco;
+                lista.comeco = lista.comeco->elo;
+                delete aux;
+            }
+        }else if(lista.fim->info == dado){
+            No * ant = NULL;
+            No * aux = lista.comeco;
+                while(aux != NULL){
+                if(aux->info == dado){
+                    if(aux->info == dado){
+
+                    }
+                    else{
+                        
+                    }
+                }
+            }
+        }else{
+            
+        }
+    }
+    
 }
 
 #endif 
