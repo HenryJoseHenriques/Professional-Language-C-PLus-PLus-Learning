@@ -9,6 +9,6 @@ int main(){
     push(lista,15);
     push(lista,89);
     push(lista,8);
-    cout << pop(lista) << "\n";
-    mostrarPILHA(lista,'C');
+    //cout << pop(lista) << "\n";
+    mostrarPILHA(lista,'D');
 }
