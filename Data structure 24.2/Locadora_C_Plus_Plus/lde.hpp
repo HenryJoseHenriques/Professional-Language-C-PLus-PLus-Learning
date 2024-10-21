@@ -1,64 +1,101 @@
 #include <iostream>
 using namespace std;
 
-struct filme
-{
-    string nome;
-    string diretor;
-    string atores;
-    string categoria;
-    int tempo;
-    int cod;
+
+template <typename T>
+struct No{
+    T info;
+    No <T> *eloA = NULL;
+    No <T> *eloP = NULL;
 };
 
-filme addFilme(string nome, string diretor, string atores, string categoria,int tempo,int cod)
+template <typename T>
+struct LDE{
+    No <T> *comeco = NULL;
+    No <T> *fim = NULL;
+};
+
+struct filmes
 {
-    filme novo;
-    novo.atores = atores;
-    novo.diretor = diretor;
-    novo.nome = nome;
-    novo.tempo = tempo;
-    novo.categoria = categoria;
-    novo.cod = cod;
-    return novo;
+    int cod;
+    string nome;
+    string categoria;
+    string diretor;
+    LDE<string> atores;
+};
+
+bool operator==(const LDE<string> &a1, const LDE<string> &a2){
+    return(a1.comeco->info == a2.comeco->info);
 }
 
-struct No
-{
-    filme info;
-    No *eloA = NULL;
-    No *eloP = NULL;
-};
+bool operator>(const LDE<string> &a1, const LDE<string> &a2){
+    return(a1.comeco->info > a2.comeco->info);
+}
 
-struct LDE
-{
-    No *comeco = NULL;
-    No *fim = NULL;
-};
+bool operator<(const LDE<string> &a1, const LDE<string> &a2){
+    return(a1.comeco->info < a2.comeco->info);
+}
 
-void inicializarLDE(LDE &lista)
+bool operator>=(const LDE<string> &a1, const LDE<string> &a2){
+    return(a1.comeco->info >= a2.comeco->info);
+}
+
+bool operator<=(const LDE<string> &a1, const LDE<string> &a2){
+    return(a1.comeco->info <= a2.comeco->info);
+}
+
+bool operator==(const filmes &f1, const filmes &f2)
 {
+    return (f1.cod == f2.cod &&
+            f1.nome == f2.nome &&
+            f1.categoria == f2.categoria &&
+            f1.diretor == f2.diretor &&
+            f1.atores == f2.atores);
+}
+
+bool operator<(const filmes &f1, const filmes &f2)
+{
+    return f1.cod < f2.cod;
+}
+
+bool operator>(const filmes &f1, const filmes &f2)
+{
+    return f1.cod > f2.cod;
+}
+
+bool operator<=(const filmes &f1, const filmes &f2)
+{
+    return f1.cod < f2.cod;
+}
+
+bool operator>=(const filmes &f1, const filmes &f2)
+{
+    return f1.cod > f2.cod;
+}
+
+/*------------------------------------------------------------------------------ */
+
+
+template <typename T>
+void inicializarLDE( LDE <T> &lista ){
     lista.comeco = NULL;
     lista.fim = NULL;
 }
 
-bool inserirFinalLDE(LDE &lista, filme valor)
-{
-    No *novo = new No;
+template <typename T>
+bool inserirFinalLDE( LDE <T> &lista, T valor ){
+    No <T> *novo = new No <T>;
 
-    if (novo == NULL)
-        return false;
+    if( novo == NULL ) return false;
     novo->info = valor;
     novo->eloA = NULL;
     novo->eloP = NULL;
 
-    if (lista.comeco == NULL)
-    { // Caso 1 - lista vazia
+    if( lista.comeco == NULL ){ // Caso 1 - lista vazia
         lista.comeco = novo;
         lista.fim = novo;
     }
-    else
-    { // Caso 2 - Inserir no final
+    else{   // Caso 2 - Inserir no final
         lista.fim->eloP = novo;
         novo->eloA = lista.fim;
         lista.fim = novo;
@@ -66,41 +103,34 @@ bool inserirFinalLDE(LDE &lista, filme valor)
     return true;
 }
 
-bool inserirLDE(LDE &lista, filme valor)
-{
-    No *novo = new No;
+template <typename T>
+bool inserirLDE(LDE <T> &lista, T valor){
+    No <T> *novo = new No <T>;
 
-    if (novo == NULL)
-        return false;
+    if( novo == NULL ) return false;
     novo->info = valor;
     novo->eloA = NULL;
     novo->eloP = NULL;
 
-    if (lista.comeco == NULL)
-    { // Caso A
+    if( lista.comeco == NULL ){ // Caso A
         lista.comeco = novo;
         lista.fim = novo;
     }
-    else if (valor.nome <= lista.comeco->info.nome)
-    { // Caso B
+    else if( valor <= lista.comeco->info ){ // Caso B
         novo->eloP = lista.comeco;
         lista.comeco->eloA = novo;
         lista.comeco = novo;
     }
-    else if (valor.nome > lista.fim->info.nome)
-    { // Caso C
+    else if( valor > lista.fim->info ){ // Caso C
         lista.fim->eloP = novo;
         novo->eloA = lista.fim;
         lista.fim = novo;
     }
-    else
-    { // Caso D
-        No *aux = lista.comeco;
-        while (aux != NULL)
-        {
-            No *prox = aux->eloP;
-            if (aux->info.nome <= valor.nome && valor.nome < prox->info.nome)
-            {
+    else{ // Caso D
+        No <T> *aux = lista.comeco;
+        while( aux != NULL ){
+            No <T> *prox = aux->eloP;
+            if( aux->info <= valor && valor < prox->info ){
                 aux->eloP = novo;
                 prox->eloA = novo;
                 novo->eloA = aux;
@@ -113,41 +143,32 @@ bool inserirLDE(LDE &lista, filme valor)
     return true;
 }
 
-bool retirarLDE(LDE &lista, filme valor)
-{
-    if (lista.comeco == NULL)
-        return false;
-    No *aux, *ant, *prox;
+template <typename T>
+bool retirarLDE( LDE <T> &lista, T valor ){
+    if( lista.comeco == NULL ) return false;
+    No <T> *aux, *ant, *prox;
 
-    if (valor.cod == lista.comeco->info.cod)
-    {
+    if( valor == lista.comeco->info ){
         aux = lista.comeco;
-        if (valor.cod == lista.fim->info.cod)
-        { // Caso a
+        if( valor == lista.fim->info ){ // Caso a
             lista.comeco = NULL;
             lista.fim = NULL;
         }
-        else
-        { // Caso b
+        else{ // Caso b
             lista.comeco = aux->eloP;
             lista.comeco->eloA = NULL;
         }
     }
-    else
-    {
-        if (valor.cod == lista.fim->info.cod)
-        { // Caso c
+    else{
+        if( valor == lista.fim->info ){ // Caso c
             aux = lista.fim;
             lista.fim = aux->eloA;
             lista.fim->eloP = NULL;
         }
-        else
-        { // Caso d
+        else{ // Caso d
             aux = lista.comeco;
-            while (aux != NULL)
-            {
-                if (aux->info.cod == valor.cod)
-                {
+            while( aux != NULL ){
+                if( aux->info == valor ){
                     ant = aux->eloA;
                     prox = aux->eloP;
                     ant->eloP = prox;
@@ -156,8 +177,7 @@ bool retirarLDE(LDE &lista, filme valor)
                 }
                 aux = aux->eloP;
             }
-            if (aux == NULL)
-                return false;
+            if( aux == NULL ) return false;
         }
     }
 
@@ -165,35 +185,27 @@ bool retirarLDE(LDE &lista, filme valor)
     return true;
 }
 
-void mostrarLDE(LDE lista, char ordem)
-{
-    if (ordem == 'C' || ordem == 'c') 
-    {
-        No *aux = lista.comeco;
-        filme infos = aux->info;
-        while (aux != NULL)
-        {
-            cout << infos.nome << "\n" << infos.diretor << "\n" << infos.categoria << "\n" << infos.tempo << "\n";
+template <typename T>
+void mostrarLDE(LDE <T> lista, char ordem){
+    if( ordem == 'C' || ordem == 'c' ){
+        No <T> *aux = lista.comeco;
+        while( aux != NULL ){
+            cout << aux->info << " ";
             aux = aux->eloP; // Avan�a para o pr�ximo no
         }
-    }
-    else
-    {
-        No *aux = lista.fim;
-        filme infos = aux->info;
-        while (aux != NULL)
-        {
-            cout << infos.nome << "\n" << infos.diretor << "\n" << infos.categoria << "\n" << infos.tempo << "\n";
+    } else {
+        No <T> *aux = lista.fim;
+        while( aux != NULL ){
+            cout << aux->info << " ";
             aux = aux->eloA; // Avan�a para o no anterior
         }
     }
 }
 
-void liberarLDE(LDE &lista)
-{
-    No *temp, *aux = lista.comeco;
-    while (aux != NULL)
-    {
+template <typename T>
+void liberarLDE(LDE <T> &lista){
+    No <T> *temp, *aux = lista.comeco;
+    while( aux != NULL ){
         temp = aux;
         aux = aux->eloP;
         delete temp;
@@ -201,15 +213,17 @@ void liberarLDE(LDE &lista)
     lista.comeco = lista.fim = NULL;
 }
 
-bool pesquisarLDE(LDE lista, filme valor)
-{
-    No *aux = lista.comeco;
-    while (aux != NULL)
-    {
-        if (aux->info.nome == valor.nome)
-            return true;
+// Retornar true se o valor for encontrado ou false se n�o estiver na lista
+// **********
+template <typename T>
+bool pesquisarLDE(LDE <T> lista, T valor){
+    No <T> *aux = lista.comeco;
+    while( aux != NULL ){
+        if( aux->info == valor ) return true;
         aux = aux->eloP;
     }
     return false;
 }
+
+
 

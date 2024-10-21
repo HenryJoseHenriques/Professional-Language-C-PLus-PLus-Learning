@@ -1,24 +1,29 @@
 #include <iostream>
-#include "lde.hpp"
 using namespace std;
-#define TAM 10
+#define TAM 17
 
+template <typename T>
 struct Hash{
-    LDE vetor[TAM];
+    LDE <T> vetor[TAM];
 };
 
-int hashing(string frase){
+int cripto(string frase){
     int total = 0;
-
     for( int i=0; i<frase.length(); i++ )
         total += int(frase[i]);
+    return total;
+}
+
+int hashing(string frase){
+    int total = cripto(frase);
     return total % TAM;
 }
 
 // int main(){
-//     Hash tabela;
-//     filme frase;
+//     Hash <string> tabela;
+//     string frase;
 //     int opcao, pos;
+
 //     for( int i=0; i<TAM; i++ ){
 //         inicializarLDE(tabela.vetor[i]);
 //     }
@@ -40,7 +45,7 @@ int hashing(string frase){
 //             case 1 :
 //                 cout << "Digite a frase a inserir: ";
 //                 getline(cin, frase);
-//                 pos = hashing(frase.nome);
+//                 pos = hashing(frase);
 //                 if( inserirLDE(tabela.vetor[pos], frase) )
 //                     cout << endl << "Insercao realizada com sucesso";
 //                 else
