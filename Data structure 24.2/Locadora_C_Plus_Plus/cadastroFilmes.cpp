@@ -108,11 +108,6 @@ bool alterarFilmes(Hash<filmes> &filme, Hash<filmes> &categoria, Hash<filmes> &d
                 ;
             cout << "\tIsolado da tabela de Atores para o ator " << aux->info << ".\n";
             aux = aux->eloP;
-
-            cout << altera.cod << "\n";
-            cout << altera.nome << "\n";
-            cout << altera.diretor << "\n";
-            cout << altera.categoria << "\n";
         }
 
         /*Realização das modificações. */
@@ -147,25 +142,20 @@ bool alterarFilmes(Hash<filmes> &filme, Hash<filmes> &categoria, Hash<filmes> &d
             default:
                 cout << "\nOpcao invalida\n";
                 break;
-
-                cout << altera.cod << "\n";
-                cout << altera.nome << "\n";
-                cout << altera.diretor << "\n";
-                cout << altera.categoria << "\n";
-
-                /*Inserção das modificações */
-                if (addPorFilme(filme, altera) && addPorCategoria(categoria, altera) && addPorDiretor(diretor, altera) && addPorAtor(ator, altera))
-                {
-                    cout << "\nAlteracoes realizadas com sucesso";
-                }
-                else
-                {
-                    cout << "\nOcoreu um erro ao tentar realizar alteracoes\n";
-                    return false;
-                }
             }
         } while (opc > 0);
-        return true;
+
+        /*Inserção das modificações */
+        if (addPorFilme(filme, altera) && addPorCategoria(categoria, altera) && addPorDiretor(diretor, altera) && addPorAtor(ator, altera))
+        {
+            cout << "\nAlteracoes realizadas com sucesso";
+            return true;
+        }
+        else
+        {
+            cout << "\nOcoreu um erro ao tentar realizar alteracoes\n";
+            return false;
+        }
     }
 }
 
