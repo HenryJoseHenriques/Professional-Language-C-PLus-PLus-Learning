@@ -1,7 +1,6 @@
 #include <iostream>
 using namespace std;
 
-
 template <typename T>
 struct No{
     T info;
@@ -22,6 +21,22 @@ struct filmes
     string categoria;
     string diretor;
     LDE<string> atores;
+    string disponibilidade;
+};
+
+struct login{
+    int matricula;
+    string nome;
+    string senha;
+};
+
+struct filmeAlugado{
+    int matriculaUser;
+    int codFilme;
+    string nomeFilme;
+    string nomeUser;
+    int data;
+    int codAluguel;
 };
 
 bool operator==(const LDE<string> &a1, const LDE<string> &a2){
@@ -50,7 +65,8 @@ bool operator==(const filmes &f1, const filmes &f2)
             f1.nome == f2.nome &&
             f1.categoria == f2.categoria &&
             f1.diretor == f2.diretor &&
-            f1.atores == f2.atores);
+            f1.atores == f2.atores && 
+            f1.disponibilidade == f2.disponibilidade);
 }
 
 bool operator<(const filmes &f1, const filmes &f2)
@@ -72,6 +88,41 @@ bool operator>=(const filmes &f1, const filmes &f2)
 {
     return f1.cod > f2.cod;
 }
+
+bool operator==(const login &l1, const login &l2){
+    return (l1.nome == l2.nome && l1.senha == l2.senha);
+}
+
+bool operator>(const login &l1, const login &l2){
+    return (l1.matricula > l2.matricula);
+}
+bool operator<(const login &l1, const login &l2){
+    return (l1.matricula < l2.matricula);
+}
+bool operator>=(const login &l1, const login &l2){
+    return (l1.matricula >= l2.matricula);
+}
+bool operator<=(const login &l1, const login &l2){
+    return (l1.matricula <= l2.matricula);
+}
+
+bool operator==(const filmeAlugado &l1, const filmeAlugado &l2){
+    return (l1.codAluguel == l2.codAluguel);
+}
+
+bool operator>(const filmeAlugado &l1, const filmeAlugado &l2){
+    return (l1.codAluguel > l2.codAluguel);
+}
+bool operator<(const filmeAlugado &l1, const filmeAlugado &l2){
+    return (l1.codAluguel < l2.codAluguel);
+}
+bool operator>=(const filmeAlugado &l1, const filmeAlugado &l2){
+    return (l1.codAluguel >= l2.codAluguel);
+}
+bool operator<=(const filmeAlugado &l1, const filmeAlugado &l2){
+    return (l1.codAluguel <= l2.codAluguel);
+}
+
 
 /*------------------------------------------------------------------------------ */
 

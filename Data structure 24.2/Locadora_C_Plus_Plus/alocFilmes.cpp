@@ -54,6 +54,7 @@ filmes criarFilme()
     novo.atores = escreverAtores();
     novo.categoria = escreverCategoria();
     novo.cod = cripto(novo.nome); // Será o código utilizado para pesquisa.
+    novo.disponibilidade = "sim";
 
     return novo;
 }

@@ -21,14 +21,14 @@ void lerCSV(Hash<filmes> &tabela, string arquivoCSV)
     while (getline(file, linha)) // Lê cada linha do arquivo
     {
         stringstream s(linha); // Transforma a linha em um stream
-        string infoFilmes[5];
+        string infoFilmes[6];
 
         // Lê os primeiros 5 campos separados por ','
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < 6; i++)
         {
             if (!getline(s, infoFilmes[i], ','))
             {
-                cout << "Erro: a linha tem menos de 5 colunas." << endl;
+                cout << "Erro: a linha tem menos de 6 colunas." << endl;
                 break;
             }
         }
@@ -44,7 +44,8 @@ void lerCSV(Hash<filmes> &tabela, string arquivoCSV)
         {
             inserirLDE(listaAtores, ator);
         }
-        filmes novoFilme = {cod, infoFilmes[1], infoFilmes[4], infoFilmes[2], listaAtores};
+
+        filmes novoFilme = {cod, infoFilmes[1], infoFilmes[4], infoFilmes[2], listaAtores, infoFilmes[5]};
 
         if (arquivoCSV == "ListaAtores.csv")
         {
@@ -112,6 +113,76 @@ void gravarCSV(Hash<filmes> &tabela, string arquivoCSV)
             }
         }
 
+        file.close();
+    }
+    else
+    {
+        cout << "Erro ao abrir o arquivo.\n";
+    }
+}
+
+
+
+void lerCSV(Hash<login> &tabela, string arquivoCSV)
+{
+    ifstream file(arquivoCSV);
+    string linha;
+    int h;
+
+    if (!file.is_open()) // Verifica se o arquivo foi aberto corretamente
+    {
+        cout << "Erro ao abrir o arquivo para leitura." << endl;
+        return;
+    }
+
+    while (getline(file, linha)) // Lê cada linha do arquivo
+    {
+        stringstream s(linha); // Transforma a linha em um stream
+        string infoFilmes[3];
+
+        // Lê os primeiros 5 campos separados por ','
+        for (int i = 0; i < 3; i++)
+        {
+            if (!getline(s, infoFilmes[i], ','))
+            {
+                cout << "Erro: a linha tem menos de 3 colunas." << endl;
+                break;
+            }
+        }
+
+        int cod = stoi(infoFilmes[0]);
+
+        login novoCadastro = {cod, infoFilmes[1], infoFilmes[2]};
+
+        if (arquivoCSV == "listaUsuarios.csv")
+        {
+            h = hashing(novoCadastro.nome);
+            inserirLDE(tabela.vetor[h], novoCadastro);
+        }else{
+            cout << "\nErro ao ler filme do CSV.\n";
+        }
+    }
+    file.close();
+}
+
+void gravarCSV(Hash<login> &tabela, string arquivoCSV)
+{
+    ofstream file(arquivoCSV);
+
+    if (file.is_open())
+    {
+        for (int i = 0; i < TAM; i++)
+        {
+            No<login> *atual = tabela.vetor[i].comeco;
+            while (atual != NULL)
+            {
+                // Gravando as informações do filme, exceto os atores
+                file << atual->info.matricula << ","
+                     << atual->info.nome << ","
+                     << atual->info.senha;
+                atual = atual->eloP;
+            }
+        }
         file.close();
     }
     else
