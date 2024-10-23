@@ -409,6 +409,7 @@ void listarFilmes(Hash<filmes> filme)
                 cout << atores->info << "\t";
                 atores = atores->eloP;
             }
+            cout << "\n";
             cout << "\tDisponivel: " << aux->info.disponibilidade << "\n";
             aux = aux->eloP;
             cout << "\n\n";

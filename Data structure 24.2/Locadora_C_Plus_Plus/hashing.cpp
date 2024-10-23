@@ -83,8 +83,15 @@ int hashing(string frase){
 
 //     }while( opcao > 0 );
 
-//     for( int i=0; i<TAM; i++ ){
-//         liberarLDE(tabela.vetor[i]);
-//     }
+    // for( int i=0; i<TAM; i++ ){
+    //     liberarLDE(tabela.vetor[i]);
+    // }
 //     cout << endl;
 // }
+
+template<typename T>
+void liberarTabela(Hash<T>& tabela) {
+    for (int i = 0; i < TAM; i++) {
+        liberarLDE(tabela.vetor[i]);
+    }
+}

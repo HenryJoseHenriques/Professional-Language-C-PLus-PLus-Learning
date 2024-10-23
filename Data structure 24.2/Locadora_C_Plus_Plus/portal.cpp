@@ -3,6 +3,7 @@
 #include "hashing.cpp"
 #include "alocFilmes.cpp"
 #include "files.cpp"
+#include "aluguelFilmes.cpp"
 #include "cadastroFilmes.cpp"
 #include "cadastroUsuario.cpp"
 #include <iostream>
@@ -50,6 +51,10 @@ void menuLocadora()
         switch (opc)
         {
         case 0:
+            liberarTabela(filme);
+            liberarTabela(categoria);
+            liberarTabela(diretor);
+            liberarTabela(atores);
             break;
         case 1:
             cadastrarFilme(filme, categoria, diretor, atores);
@@ -93,7 +98,7 @@ void menuLocadora()
             listarFilmes(filme);
             break;
         case 6:
-            entrarNoPortal(filme);
+            entrarNoPortal(filme, categoria, diretor, atores, t1,t2,t3,t4);
             break;
         default:
             cout << "Opcao invalida.\n";

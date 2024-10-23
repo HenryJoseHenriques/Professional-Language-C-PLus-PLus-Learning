@@ -2,12 +2,11 @@
 #include <fstream>
 #include <iostream>
 #include <string>
-
 using namespace std;
 
 void lerCSV(Hash<filmes> &tabela, string arquivoCSV)
 {
-    //cout << arquivoCSV;
+    // cout << arquivoCSV;
     ifstream file(arquivoCSV);
     string linha;
     int h;
@@ -71,7 +70,9 @@ void lerCSV(Hash<filmes> &tabela, string arquivoCSV)
         {
             h = hashing(novoFilme.nome);
             inserirLDE(tabela.vetor[h], novoFilme);
-        }else{
+        }
+        else
+        {
             cout << "\nErro ao ler filme do CSV.\n";
         }
     }
@@ -107,7 +108,8 @@ void gravarCSV(Hash<filmes> &tabela, string arquivoCSV)
                 }
 
                 // Continuando com as outras informações
-                file << "," << atual->info.categoria << "\n";
+                file << "," << atual->info.categoria << "," <<
+                atual->info.disponibilidade << "\n";
 
                 atual = atual->eloP;
             }
@@ -120,8 +122,6 @@ void gravarCSV(Hash<filmes> &tabela, string arquivoCSV)
         cout << "Erro ao abrir o arquivo.\n";
     }
 }
-
-
 
 void lerCSV(Hash<login> &tabela, string arquivoCSV)
 {
@@ -158,7 +158,9 @@ void lerCSV(Hash<login> &tabela, string arquivoCSV)
         {
             h = hashing(novoCadastro.nome);
             inserirLDE(tabela.vetor[h], novoCadastro);
-        }else{
+        }
+        else
+        {
             cout << "\nErro ao ler filme do CSV.\n";
         }
     }
@@ -189,4 +191,78 @@ void gravarCSV(Hash<login> &tabela, string arquivoCSV)
     {
         cout << "Erro ao abrir o arquivo.\n";
     }
+}
+
+void lerCSV(Hash<filmeAlugado> &lista, string arquivo)
+{
+    ifstream file(arquivo);
+    string linha;
+
+    if (!file.is_open())
+    {
+        cout << "Erro ao abrir o arquivo de aluguéis." << endl;
+        return;
+    }
+
+    while (getline(file, linha))
+    {
+        stringstream s(linha);
+        string infoAluga[6];  
+        for (int i = 0; i < 6; i++)
+        {
+            if (!getline(s, infoAluga[i], ','))
+            {
+                cout << "Erro: a linha tem menos de 6 colunas." << endl;
+                break;
+            }
+        }
+
+        int matriculaUser = stoi(infoAluga[0]);
+        int codFilme = stoi(infoAluga[1]);
+        string nomeFilme = infoAluga[2];
+        string nomeUser = infoAluga[3];
+        int data = stoi(infoAluga[4]);
+        int codAluguel = stoi(infoAluga[5]); 
+        filmeAlugado novo = {matriculaUser, codFilme, nomeFilme, nomeUser, data, codAluguel};
+
+        if (arquivo == "listaAlugados.csv")
+        {
+            int indiceHash = codAluguel % TAM;
+            inserirLDE(lista.vetor[indiceHash], novo);
+        }
+        else
+        {
+            cout << "\nErro ao ler do filmes alugados do CSV\n";
+        }
+    }
+
+    file.close();
+}
+
+void gravarCSV(Hash<filmeAlugado> &lista, string arquivo)
+{
+    ofstream file(arquivo); // Abre o arquivo para escrita
+
+    if (!file.is_open())
+    {
+        cout << "\nErro ao abrir o arquivo de alugueis.\n";
+        return;
+    }
+
+    for (int i = 0; i < TAM; i++)
+    {
+        No<filmeAlugado> *aux = lista.vetor[i].comeco;
+        while (aux != NULL)
+        {
+            file << aux->info.matriculaUser << ","
+                 << aux->info.codFilme << ","
+                 << aux->info.nomeFilme << ","
+                 << aux->info.nomeUser << ","
+                 << aux->info.data << ","
+                 << aux->info.codAluguel << "\n";
+            aux = aux->eloP;
+        }
+    }
+
+    file.close();
 }

@@ -70,9 +70,10 @@ void initUser(Hash<login> &usuarios)
     }
 }
 
-void entrarNoPortal(Hash<filmes> &lista)
+void entrarNoPortal(Hash<filmes> &filme, Hash<filmes> &categoria, Hash<filmes> &diretor, Hash<filmes> &atores, string t1,string t2, string t3,string t4)
 {
     string listaUser = "listaUsuarios.csv";
+    login User;
     Hash<login> usuarios;
     initUser(usuarios);
     lerCSV(usuarios, listaUser);
@@ -88,11 +89,13 @@ void entrarNoPortal(Hash<filmes> &lista)
         switch (opc)
         {
         case 0:
+            liberarTabela(usuarios);
             break;
         case 1:
-            if (fazerLogin(usuarios, credenciais()))
+            User = credenciais();
+            if (fazerLogin(usuarios, User))
             {
-                // Alugar filmes
+                alugarFilmes(filme, categoria, diretor, atores, User, t1,t2,t3,t4);
             }
             else
             {
