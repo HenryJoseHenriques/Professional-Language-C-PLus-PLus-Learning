@@ -112,28 +112,38 @@ bool pesquisaAluguelLista(LDE<filmeAlugado> lista, int codFilme, filmeAlugado &i
     return false;
 }
 
-bool devolverFilmeAlugado(Hash<filmes> filme, Hash<filmeAlugado> &lista, filmes &retorno)
-{
+bool devolverFilmeAlugado(Hash<filmes> &filme, Hash<filmeAlugado> &lista, filmes &retorno) {
     int codFilme;
-    cout << "\nDigite o código do filme a ser devolvido:\n";
+    int diaDevolucao;
+
+    // Pergunta o dia da devolução
+    cout << "\nDigite o dia do mês em que está devolvendo o filme (1-31): ";
+    cin >> diaDevolucao;
+
+    cout << "\nDigite o código do filme a ser devolvido: ";
     cin >> codFilme;
-    cin.ignore();
+
+    // Verifica se o filme está na lista de alugados
     filmeAlugado devolve;
-    
     int hA = codFilme % TAM;
-    cout << "\n" << hA << "\n";
-    if (!pesquisaAluguelLista(lista.vetor[hA], codFilme, devolve))
-    {
+
+    if (!pesquisaAluguelLista(lista.vetor[hA], codFilme, devolve)) {
+        cout << "\nFilme não encontrado na lista de alugados.\n";
         return false;
     }
-    else
-    {
-        retornarFilmeCod(filme, codFilme, retorno);
-        retirarLDE(lista.vetor[hA], devolve);
-        return true;
-    }
-}
 
+    // Verifica se a devolução está atrasada
+    if (diaDevolucao - devolve.data > 3) {
+        cout << "\nA devolução está atrasada! Você deve pagar uma multa.\n";
+    }
+
+    // Retorna o filme e remove da lista de alugados
+    retornarFilmeCod(filme, codFilme, retorno);
+    retirarLDE(lista.vetor[hA], devolve);
+
+    cout << "\nFilme devolvido com sucesso.\n";
+    return true;
+}
 
 // Função principal para gerenciar o aluguel de filmes
 void alugarFilmes(Hash<filmes> &filme, Hash<filmes> &categoria, Hash<filmes> &diretor, Hash<filmes> &ator, login User, string t1, string t2, string t3, string t4)
