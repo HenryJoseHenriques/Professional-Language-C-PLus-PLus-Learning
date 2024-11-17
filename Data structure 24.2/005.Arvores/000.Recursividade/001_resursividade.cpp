@@ -7,5 +7,5 @@ int quociente(int x, int y){
 }
 
 int main(){
-    cout << quociente(28,4);
+    cout << quociente(27,4);
 }
