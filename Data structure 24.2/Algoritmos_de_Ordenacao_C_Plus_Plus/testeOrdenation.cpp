@@ -14,6 +14,14 @@ void printVector(int *v, int n)
     cout << "\n";
 }
 
+int *copiarVetor(int *v, int n)
+{
+    int *c = new int[n];
+    for (int i = 0; i < n; i++)
+        c[i] = v[i];
+    return c;
+}
+
 int *VetorPiorCaso(int n)
 {
     int *v = new int[n];
@@ -50,61 +58,40 @@ int *VetorCasoMedio(int n)
     return v;
 }
 
-void TestarInsertion(int n, int r)
+double timerRegisterSort(int n, int r, void(sort)(int *v, int m, int k), int *(caseV)(int t))
 {
-    double somaM = 0.0f, somaP = 0.0f, somaT = 0.0f, mediaP, mediaM, mediaT;
-
+    double soma = 0.0f, media;
+    int *vectorT = caseV(n);
     for (int i = 0; i < r; i++)
     {
-        int *SelectionP = VetorPiorCaso(n);
-        printVector(SelectionP, n);
-
+        int *copyVector = copiarVetor(vectorT, n);
         auto inicio = steady_clock::now();
-        insertion_sort(SelectionP, n);
+        sort(copyVector, 0, n);
         auto fim = steady_clock::now();
         auto duracao = fim - inicio;
-
-        somaP += duration_cast<nanoseconds>(duracao).count();
-        delete[] SelectionP;
+        soma += duration_cast<nanoseconds>(duracao).count();
+        delete[] copyVector;
     }
-    cout << "\nSoma pior: " << somaP << "\n";
-    mediaP = somaP / r;
+    delete[] vectorT;
+    media = soma / r;
+    return media;
+}
 
-    for (int i = 0; i < r; i++)
-    {
-        int *SelectionM = VetorMelhorCaso(n);
-        printVector(SelectionM, n);
+void BenchMarkSort(int n, int r, void(sort)(int *v,int m, int n))
+{
+    colorScreen color;
+    double mediaP, mediaM, mediaT;
 
-        auto inicio = steady_clock::now();
-        insertion_sort(SelectionM, n);
-        auto fim = steady_clock::now();
-        auto duracao = fim - inicio;
+    mediaP = timerRegisterSort(n, r, sort, VetorPiorCaso);
+    mediaM = timerRegisterSort(n, r, sort, VetorMelhorCaso);
+    mediaT = timerRegisterSort(n, r, sort, VetorCasoMedio);
 
-        somaM += duration_cast<nanoseconds>(duracao).count();
-        delete[] SelectionM;
-    }
-    cout << "Soma melhor: " << somaM << "\n";
-    mediaM = somaM / r;
-
-    for (int i = 0; i < r; i++)
-    {
-        int *SelectionT = VetorCasoMedio(n);
-        printVector(SelectionT, n);
-
-        auto inicio = steady_clock::now();
-        insertion_sort(SelectionT, n);
-        auto fim = steady_clock::now();
-        auto duracao = fim - inicio;
-
-        somaT += duration_cast<nanoseconds>(duracao).count();
-        delete[] SelectionT;
-    }
-    cout << "Soma Medio: " << somaT << "\n";
-    mediaT = somaT / r;
-
-    cout << "\nTeste de ordenacao do Inserction Sort com " << r << " repeticoes\n";
-    cout << "\t\nPior caso " << mediaP << " ns \n";
-    cout << "\t\nMelhor caso " << mediaM << " ns \n";
-    cout << "\t\nCaso Medio " << mediaT << " ns \n";
+    cout << "\nTeste de ordenacao com  tamanho " << n << " e " << r <<" repeticoes: \n";
+    cout << color.red << "\t\nPior caso: " << mediaP << " ns \n"
+         << color.reset;
+    cout << color.yellow << "\t\nCaso Medio: " << mediaT << " ns \n"
+         << color.reset;
+    cout << color.green << "\t\nMelhor caso: " << mediaM << " ns \n"
+         << color.reset;
     pauseScreen();
 }

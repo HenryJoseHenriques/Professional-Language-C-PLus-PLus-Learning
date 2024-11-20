@@ -1,7 +1,7 @@
 #include <iostream>
 using namespace std;
 
-void insertion_sort(int *&vetor, int n)
+void insertion_sort(int *vetor,int m, int n)
 {
     for (int i = 1; i < n; i++)
     {
@@ -16,7 +16,7 @@ void insertion_sort(int *&vetor, int n)
     }
 }
 
-void shell_sort(int *&arr, int n)
+void shell_sort(int *arr,int m, int n)
 {
     for (int gap = n / 2; gap > 0; gap /= 2)
     {
@@ -31,7 +31,7 @@ void shell_sort(int *&arr, int n)
     }
 }
 
-void bubble_sort(int *&array, int n)
+void bubble_sort(int *array,int m, int n)
 {
     for (int step = 0; step < n - 1; ++step)
     {
@@ -56,7 +56,7 @@ void swap(int *a, int *b)
     *b = t;
 }
 
-int partition(int *&array, int low, int high)
+int partition(int *array, int low, int high)
 {
     int pivot = array[high];
     int i = (low - 1);
@@ -72,7 +72,7 @@ int partition(int *&array, int low, int high)
     return (i + 1);
 }
 
-void quick_sort(int *&array, int low, int high)
+void quick_sort(int *array, int low, int high)
 {
     if (low < high)
     {
@@ -82,7 +82,7 @@ void quick_sort(int *&array, int low, int high)
     }
 }
 
-void selection_sort(int *&array, int size)
+void selection_sort(int *array,int m, int size)
 {
     for (int step = 0; step < size - 1; step++)
     {
@@ -100,7 +100,7 @@ void selection_sort(int *&array, int size)
 
 /*------------------------- */
 
-void heapify(int arr[], int n, int i)
+void heapify(int *arr, int n, int i)
 {
     int largest = i;
     int left = 2 * i + 1;
@@ -119,7 +119,7 @@ void heapify(int arr[], int n, int i)
     }
 }
 
-void heap_sort(int *&arr, int n)
+void heap_sort(int *arr,int m, int n)
 {
     for (int i = n / 2 - 1; i >= 0; i--)
         heapify(arr, n, i);
@@ -134,7 +134,7 @@ void heap_sort(int *&arr, int n)
 
 /*------------------------- */
 
-void merge(int *&arr, int left,int mid, int right)
+void merge(int *arr, int left,int mid, int right)
 {
     int n1 = mid - left + 1;
     int n2 = right - mid;
@@ -174,7 +174,7 @@ void merge(int *&arr, int left,int mid, int right)
     }
 }
 
-void merge_sort(int *&arr, int left, int right)
+void merge_sort(int *arr, int left, int right)
 {
     if (left >= right)
         return;
