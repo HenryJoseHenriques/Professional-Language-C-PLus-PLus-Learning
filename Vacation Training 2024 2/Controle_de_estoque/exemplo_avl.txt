@@ -1,0 +1,75 @@
+// #include <iostream>
+// #include "avl.hpp"
+// using namespace std;
+
+// int main(){
+//     No <int> *raiz = NULL;
+//     int opcao, valor;
+
+//     do{
+//         cout << endl << "Arvore AVL:";
+//         cout << endl << "\t1 - Inserir";
+//         cout << endl << "\t2 - Retirar";
+//         cout << endl << "\t3 - Pesquisar";
+//         cout << endl << "\t4 - Pre-fixado";
+//         cout << endl << "\t5 - Infixado";
+//         cout << endl << "\t6 - Pos-fixado";
+//         cout << endl << "\t7 - Contar nos";
+//         cout << endl << "\t8 - Mostrar";
+//         cout << endl << "\t0 - Fim";
+//         cout << endl << "Opcao: ";
+//         cin >> opcao;
+
+//         switch(opcao){
+//             case 0 :
+//                 break;
+//             case 1 : // Inserir
+//                 cout << endl << "Valor para inserir: ";
+//                 cin >> valor;
+//                 raiz = inserir_avl(raiz, valor);
+//                 break;
+//             case 2 : // Retirar
+//                 cout << endl << "Valor para remover: ";
+//                 cin >> valor;
+//                 raiz = retirar_avl(raiz, valor);
+//                 break;
+//             case 3 : // Pesquisar
+//                 cout << endl << "Valor para pesquisar: ";
+//                 cin >> valor;
+//                 if( pesquisar_avl(raiz, valor) )
+//                     cout << "Valor localizado na arvore" << endl;
+//                 else
+//                     cout << "Valor NAO presente na arvore" << endl;
+//                 break;
+//             case 4 : // Pre-fixado
+//                 cout << endl << "Pre-fixado: ";
+//                 prefixado(raiz);
+//                 cout << endl;
+//                 break;
+//             case 5 : // Infixado
+//                 cout << endl << "Infixado: ";
+//                 infixado(raiz);
+//                 cout << endl;
+//                 break;
+//             case 6 : // Pos-fixado
+//                 cout << endl << "Pos-fixado: ";
+//                 posfixado(raiz);
+//                 cout << endl;
+//                 break;
+//             case 7 : // Contar nos
+//                 cout << endl << "Esta arvore tem ";
+//                 cout << contar(raiz);
+//                 cout << " nos" << endl;
+//                 break;
+//             case 8 : // Mostrar
+//                 cout << endl << "Arvore: ";
+//                 mostrar_avl(raiz);
+//                 cout << endl;
+//                 break;
+//         }
+
+//     }while( opcao != 0 );
+
+//     liberar_avl(raiz);
+//     cout << endl;
+// }

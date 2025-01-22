@@ -45,7 +45,6 @@ int *VetorMelhorCaso(int n)
 int *VetorCasoMedio(int n)
 {
     int *v = new int[n];
-    srand(time(NULL));
     for (int i = 0; i < n; i++)
     {
         v[i] = i;
