@@ -3,13 +3,13 @@
 using namespace std;
 
 template <typename T>
-void readFile(No<T> *source, string Namefile)
+void readFile(No<T> *source, string namefile)
 {
-    fstream file(Namefile);
+    fstream file(namefile);
 }
 
 template <typename T>
-void writeFile(No<T> *source, string file)
+void writeFile(No<T> *source, string namefile)
 {
-    fstream file(Namefile);
+    fstream file(namefile);
 }

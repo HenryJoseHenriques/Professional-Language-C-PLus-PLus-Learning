@@ -6,7 +6,7 @@ struct No{
     T info;
     int alt = 1;
     No <T> *esq=NULL, *dir=NULL;
-};
+};  
 
 template <typename T>
 void prefixado(No <T> *raiz){
